@@ -1,0 +1,5 @@
+C:\Users\Admin\source\repos\2pool\obj\Debug\net472\2pool.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\2pool\obj\Debug\net472\MainWindow.g.cs
+C:\Users\Admin\source\repos\2pool\obj\Debug\net472\App.g.cs
+C:\Users\Admin\source\repos\2pool\obj\Debug\net472\2pool_MarkupCompile.cache
+C:\Users\Admin\source\repos\2pool\obj\Debug\net472\2pool_MarkupCompile.lref

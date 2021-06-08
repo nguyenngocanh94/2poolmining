@@ -1,0 +1,113 @@
+﻿<mah:MetroWindow x:Class="Chia2Pool.Views.DashboardView" Background="White"
+                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                       xmlns:local="clr-namespace:Chia2Pool.Views"
+                       xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                        xmlns:model="clr-namespace:Chia2Pool.Models"
+                       xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls" 
+                 xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                 mc:Ignorable="d"
+                        GlowBrush="{DynamicResource MahApps.Brushes.Accent}"
+                       Title="2Pool Chia Minner" Height="350" Width="550">
+    <mah:MetroWindow.IconTemplate>
+        <DataTemplate>
+            <iconPacks:PackIconUnicons Kind="Trees" 
+                                       Width="20" 
+                                       Height="20"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Margin="4"
+                                       Foreground="{DynamicResource MahApps.Brushes.IdealForeground}"/>
+        </DataTemplate>
+    </mah:MetroWindow.IconTemplate>
+    <mah:MetroWindow.Resources>
+        <Style TargetType="ItemsControl" x:Key="LogViewerStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <ScrollViewer CanContentScroll="True">
+                            <ItemsPresenter/>
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <DataTemplate DataType="{x:Type model:LogEntry}">
+            <Grid IsSharedSizeScope="True">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="Index" Width="Auto"/>
+                    <ColumnDefinition SharedSizeGroup="Date" Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock  Text="{Binding DateTime}" Grid.Column="0"
+                       FontWeight="Bold" Margin="5,0,5,0"/>
+
+                <TextBlock Background="Red"  Text="{Binding Level}" Grid.Column="1"
+                       FontWeight="Bold" Margin="0,0,2,0" />
+
+                <TextBlock  Text="{Binding Message}" Grid.Column="2"
+                       TextWrapping="Wrap"/>
+            </Grid>
+        </DataTemplate>
+    </mah:MetroWindow.Resources>
+    <Grid Height="326" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="80" />
+            <RowDefinition Height="200" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+        <TextBlock Margin="10,5,5,0">           
+            <Hyperlink NavigateUri="http://www.google.com" RequestNavigate="Hyperlink_RequestNavigate">
+                Register in https://2pool.io to start mining pool
+        </Hyperlink>
+        </TextBlock>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                    <TextBlock Text="ApiKey" Margin="5 5 5 0"></TextBlock>
+                    <TextBox x:Name="ApiKey"  Width="350" Height="20" Controls:TextBoxHelper.ClearTextButton="True" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                    <TextBlock Text="Chia Ssl" Margin="0 5 5 0"></TextBlock>
+                    <TextBox x:Name="SslDirectory" Width="350" Height="20" Controls:TextBoxHelper.ClearTextButton="True" />
+                </StackPanel>
+            </StackPanel>
+            <Button Command="{Binding StartMiningCommand}" Margin="10 0 10 10" Width="100" Height="30" Grid.Column="1" Style="{DynamicResource MahApps.Styles.Button.Dialogs}">
+                <TextBlock  Margin="0 0 0 0">Start Mining</TextBlock>
+            </Button>
+        </Grid>
+        <DockPanel Grid.Row="2">
+            <ItemsControl ItemsSource="{Binding LogEntries, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource LogViewerStyle}">
+                <ItemsControl.Template>
+                    <ControlTemplate>
+                        <ScrollViewer CanContentScroll="True">
+                            <ItemsPresenter/>
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </ItemsControl.Template>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </DockPanel>
+    </Grid>
+</mah:MetroWindow>

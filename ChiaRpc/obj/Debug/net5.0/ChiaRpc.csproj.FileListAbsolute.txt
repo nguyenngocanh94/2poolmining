@@ -1,0 +1,12 @@
+C:\Users\Admin\source\repos\ChiaRpc\bin\Debug\net5.0\ChiaRpc.deps.json
+C:\Users\Admin\source\repos\ChiaRpc\bin\Debug\net5.0\ChiaRpc.dll
+C:\Users\Admin\source\repos\ChiaRpc\bin\Debug\net5.0\ref\ChiaRpc.dll
+C:\Users\Admin\source\repos\ChiaRpc\bin\Debug\net5.0\ChiaRpc.pdb
+C:\Users\Admin\source\repos\ChiaRpc\obj\Debug\net5.0\ChiaRpc.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\ChiaRpc\obj\Debug\net5.0\ChiaRpc.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\source\repos\ChiaRpc\obj\Debug\net5.0\ChiaRpc.AssemblyInfoInputs.cache
+C:\Users\Admin\source\repos\ChiaRpc\obj\Debug\net5.0\ChiaRpc.AssemblyInfo.cs
+C:\Users\Admin\source\repos\ChiaRpc\obj\Debug\net5.0\ChiaRpc.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\ChiaRpc\obj\Debug\net5.0\ChiaRpc.dll
+C:\Users\Admin\source\repos\ChiaRpc\obj\Debug\net5.0\ref\ChiaRpc.dll
+C:\Users\Admin\source\repos\ChiaRpc\obj\Debug\net5.0\ChiaRpc.pdb

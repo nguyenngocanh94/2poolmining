@@ -1,0 +1,4 @@
+C:\Users\Admin\source\repos\2pool\obj\Debug\netstandard2.1\2pool.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\2pool\obj\Debug\netstandard2.1\2pool.AssemblyInfoInputs.cache
+C:\Users\Admin\source\repos\2pool\obj\Debug\netstandard2.1\2pool.AssemblyInfo.cs
+C:\Users\Admin\source\repos\2pool\obj\Debug\netstandard2.1\2pool.csproj.CoreCompileInputs.cache
