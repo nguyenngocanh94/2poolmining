@@ -6,6 +6,7 @@
                        xmlns:local="clr-namespace:Chia2Pool.Views"
                        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                         xmlns:model="clr-namespace:Chia2Pool.Models"
+                        xmlns:common="clr-namespace:Chia2Pool.Common"
                        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls" 
                  xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
                  mc:Ignorable="d"
@@ -33,7 +34,11 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+                    <SolidColorBrush Color="Black"></SolidColorBrush>
+                </Setter.Value>
+            </Setter>
             <Setter Property="ItemsPanel">
                 <Setter.Value>
                     <ItemsPanelTemplate>
@@ -42,7 +47,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
+        <common:ColorConverter x:Key="logConverter"/>
         <DataTemplate DataType="{x:Type model:LogEntry}">
             <Grid IsSharedSizeScope="True">
                 <Grid.ColumnDefinitions>
@@ -54,8 +59,8 @@
                 <TextBlock  Text="{Binding DateTime}" Grid.Column="0"
                        FontWeight="Bold" Margin="5,0,5,0"/>
 
-                <TextBlock Background="Red"  Text="{Binding Level}" Grid.Column="1"
-                       FontWeight="Bold" Margin="0,0,2,0" />
+                <TextBlock Background="Black" Foreground="{Binding Path=Level, Converter={StaticResource logConverter}}" Text="{Binding Level}" Grid.Column="1"
+                           FontWeight="Bold" Margin="0,0,2,0" />
 
                 <TextBlock  Text="{Binding Message}" Grid.Column="2"
                        TextWrapping="Wrap"/>
@@ -82,14 +87,14 @@
             <StackPanel Grid.Column="0">
                 <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
                     <TextBlock Text="ApiKey" Margin="5 5 5 0"></TextBlock>
-                    <TextBox x:Name="ApiKey"  Width="350" Height="20" Controls:TextBoxHelper.ClearTextButton="True" />
+                    <TextBox IsReadOnly="{Binding IsReadOnly}" x:Name="ApiKey"  Width="350" Height="20" Controls:TextBoxHelper.ClearTextButton="True" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
                     <TextBlock Text="Chia Ssl" Margin="0 5 5 0"></TextBlock>
-                    <TextBox x:Name="SslDirectory" Width="350" Height="20" Controls:TextBoxHelper.ClearTextButton="True" />
+                    <TextBox IsReadOnly="{Binding IsReadOnly}" x:Name="SslDirectory" Width="350" Height="20" Controls:TextBoxHelper.ClearTextButton="True" />
                 </StackPanel>
             </StackPanel>
-            <Button Command="{Binding StartMiningCommand}" Margin="10 0 10 10" Width="100" Height="30" Grid.Column="1" Style="{DynamicResource MahApps.Styles.Button.Dialogs}">
+            <Button IsEnabled="{Binding IsEnableButton}" Command="{Binding StartMiningCommand}" Margin="10 0 10 10" Width="100" Height="30" Grid.Column="1" Style="{DynamicResource MahApps.Styles.Button.Dialogs}">
                 <TextBlock  Margin="0 0 0 0">Start Mining</TextBlock>
             </Button>
         </Grid>

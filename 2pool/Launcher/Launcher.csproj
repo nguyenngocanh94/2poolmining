@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <UseWPF>true</UseWPF>
+        <ApplicationIcon>logo-3-normal.ico</ApplicationIcon>
+        <AssemblyName>Update</AssemblyName>
+    </PropertyGroup>
+
+</Project>

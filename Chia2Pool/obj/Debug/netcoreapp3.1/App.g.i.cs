@@ -54,7 +54,7 @@ namespace Chia2Pool {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Chia2Pool;component/app.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/2Pool;V0.0.1;component/app.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\App.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

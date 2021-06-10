@@ -1,0 +1,9 @@
+C:\Users\Admin\source\repos\ChiaRpc\bin\Release\netcoreapp3.1\ChiaRpc.deps.json
+C:\Users\Admin\source\repos\ChiaRpc\bin\Release\netcoreapp3.1\ChiaRpc.dll
+C:\Users\Admin\source\repos\ChiaRpc\bin\Release\netcoreapp3.1\ChiaRpc.pdb
+C:\Users\Admin\source\repos\ChiaRpc\obj\Release\netcoreapp3.1\ChiaRpc.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\ChiaRpc\obj\Release\netcoreapp3.1\ChiaRpc.AssemblyInfoInputs.cache
+C:\Users\Admin\source\repos\ChiaRpc\obj\Release\netcoreapp3.1\ChiaRpc.AssemblyInfo.cs
+C:\Users\Admin\source\repos\ChiaRpc\obj\Release\netcoreapp3.1\ChiaRpc.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\ChiaRpc\obj\Release\netcoreapp3.1\ChiaRpc.dll
+C:\Users\Admin\source\repos\ChiaRpc\obj\Release\netcoreapp3.1\ChiaRpc.pdb

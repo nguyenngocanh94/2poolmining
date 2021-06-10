@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Launcher": {
+      "commandName": "Project"
+    },
+    "newProfile1": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\Admin\\source\\repos\\Chia2Pool\\bin\\Release\\netcoreapp3.1\\2Pool.exe",
+      "nativeDebugging": true
+    }
+  }
+}

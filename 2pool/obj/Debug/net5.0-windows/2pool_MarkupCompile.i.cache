@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Admin\source\repos\2Pool\obj\Debug\net5.0-windows\
+C:\Users\Admin\source\repos\2pool\obj\Debug\net5.0-windows\
 _2pool
 none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
-C:\Users\Admin\source\repos\2Pool\App.xaml
-11407045341
+C:\Users\Admin\source\repos\2pool\App.xaml
+3-1844802459
 
-15-234045399
+481079586113
 2351705525849
-MainWindow.xaml;
+Launcher\App.xaml;Launcher\MainWindow.xaml;MainWindow.xaml;
 
 False
 

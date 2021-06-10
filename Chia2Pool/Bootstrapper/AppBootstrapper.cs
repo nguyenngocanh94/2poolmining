@@ -6,8 +6,9 @@ using System.ComponentModel.Composition.Primitives;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text.Json;
+using System.Runtime.InteropServices;
 using System.Text.Json.Serialization;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -18,6 +19,9 @@ using Chia2Pool.ViewModels;
 using Chia2Pool.Views;
 using ControlzEx.Theming;
 using log4net.Repository.Hierarchy;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 using KeyTrigger = Chia2Pool.KeyBinding.KeyTrigger;
 
 namespace Chia2Pool.Bootstrapper
@@ -29,10 +33,12 @@ namespace Chia2Pool.Bootstrapper
         private Dictionary<string, Assembly> _nameToAssemblyDict;
 
         private const string ChiaRpc = "ChiaRpc.dll";
-        private const string Chia2Pool = "Chia2Pool.dll";
+        private const string Chia2Pool = "2Pool.dll";
 
 
         private readonly string[] _assembliesForCaliburn = {Chia2Pool, Chia2Pool};
+
+        static Mutex mutex = new Mutex(true, "{8F6F0AC4-B9A1-45fd-A8CF-72F04E6BDE8F}");
 
         public AppBootstrapper()
         {
@@ -44,20 +50,34 @@ namespace Chia2Pool.Bootstrapper
             Common.Logger.GetLog = () => log4net.LogManager.GetLogger(typeof(AppBootstrapper));
         }
 
+        [STAThread]
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
-            ThemeManager.Current.ChangeTheme(sender as App, "Light.Green");
-            string runtimeDirectory = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-            if (File.Exists(runtimeDirectory + "/keys.2pool"))
+            MessageBox.Show("Attach process to debugger and click ok!");
+            if (mutex.WaitOne(TimeSpan.Zero, true))
             {
-                var self = JsonSerializer.Deserialize<SettingTemp>(File.ReadAllText(runtimeDirectory + "/keys.2pool"));
-                Settings.GetInstance().ApiKey = self.ApiKey;
-                Settings.GetInstance().SslDirectory = self.SslDirectory;
-                Settings.GetInstance().PoolUrl = self.PoolUrl;
+                ThemeManager.Current.ChangeTheme(sender as App, "Light.Green");
+                
+                DisplayRootViewFor<DashboardViewModel>();
+                mutex.ReleaseMutex();
             }
-            DisplayRootViewFor<DashboardViewModel>();
+            else
+            {
+                NativeMethods.PostMessage(
+                    (IntPtr) NativeMethods.HWND_BROADCAST,
+                    NativeMethods.WM_SHOWME,
+                    IntPtr.Zero,
+                    IntPtr.Zero);
+            }
         }
 
+
+        protected override void OnExit(object sender, EventArgs e)
+        {
+            mutex.ReleaseMutex();
+            mutex.Close();
+        }
+        
         protected override IEnumerable<Assembly> SelectAssemblies()
         {
             string mainAssemblyPath = Assembly.GetEntryAssembly().Location;
@@ -142,7 +162,7 @@ namespace Chia2Pool.Bootstrapper
                     .Replace("[", string.Empty)
                     .Replace("]", string.Empty);
 
-                var splits = triggerDetail.Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
+                var splits = triggerDetail.Split((char[]) null, StringSplitOptions.RemoveEmptyEntries);
 
                 // switch (splits[0])
                 // {
@@ -236,5 +256,17 @@ namespace Chia2Pool.Bootstrapper
 
             return container;
         }
+    }
+
+    public class NativeMethods
+    {
+        public const int HWND_BROADCAST = 0xffff;
+        public static readonly int WM_SHOWME = RegisterWindowMessage("WM_SHOWME");
+
+        [DllImport("user32")]
+        public static extern bool PostMessage(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam);
+
+        [DllImport("user32")]
+        public static extern int RegisterWindowMessage(string message);
     }
 }

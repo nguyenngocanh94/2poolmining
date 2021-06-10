@@ -29,18 +29,18 @@ namespace _2pool
         [STAThread]
         protected override void OnStartup(StartupEventArgs e)
         {
-            // if(mutex.WaitOne(TimeSpan.Zero, true)) {
-            //     
-            //     mutex.ReleaseMutex();
-            // } else {
-            //     // send our Win32 message to make the currently running instance
-            //     // jump on top of all the other windows
-            //     NativeMethods.PostMessage(
-            //         (IntPtr)NativeMethods.HWND_BROADCAST,
-            //         NativeMethods.WM_SHOWME,
-            //         IntPtr.Zero,
-            //         IntPtr.Zero);
-            // }
+            if(mutex.WaitOne(TimeSpan.Zero, true)) {
+                
+                mutex.ReleaseMutex();
+            } else {
+                // send our Win32 message to make the currently running instance
+                // jump on top of all the other windows
+                NativeMethods.PostMessage(
+                    (IntPtr)NativeMethods.HWND_BROADCAST,
+                    NativeMethods.WM_SHOWME,
+                    IntPtr.Zero,
+                    IntPtr.Zero);
+            }
             try
             {
                 ThemeManager.Current.ChangeTheme(this, "Dark.Green");
@@ -55,8 +55,8 @@ namespace _2pool
 
         private void App_OnExit(object sender, ExitEventArgs e)
         {
-        //     mutex.ReleaseMutex();
-        //     mutex.Close();
+        mutex.ReleaseMutex();
+        mutex.Close();
     }
 }
 

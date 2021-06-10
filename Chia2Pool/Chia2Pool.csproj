@@ -5,6 +5,15 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <UseWPF>true</UseWPF>
         <LangVersion>latest</LangVersion>
+        <Company>2Pool.io</Company>
+        <Product>2Pool.io</Product>
+        <AssemblyVersion>0.0.1</AssemblyVersion>
+        <FileVersion>0.0.1</FileVersion>
+        <NeutralLanguage>en</NeutralLanguage>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>erics.nguyen.snk</AssemblyOriginatorKeyFile>
+        <ApplicationIcon>logo-3-normal.ico</ApplicationIcon>
+        <AssemblyName>2Pool</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>

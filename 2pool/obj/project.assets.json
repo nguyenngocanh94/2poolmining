@@ -6838,18 +6838,18 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\2pool\\2pool.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\2Pool\\2pool.csproj",
       "projectName": "2pool",
-      "projectPath": "C:\\Users\\Admin\\source\\repos\\2pool\\2pool.csproj",
+      "projectPath": "C:\\Users\\Admin\\source\\repos\\2Pool\\2pool.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\source\\repos\\2pool\\obj\\",
+      "outputPath": "C:\\Users\\Admin\\source\\repos\\2Pool\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net5.0-windows"
+        "net5.0-windows7.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},

@@ -9,4 +9,12 @@ namespace ChiaRpc.Exceptions
             
         }
     }
+    
+    public class ChiaConnectionException : HttpRequestException
+    {
+        public ChiaConnectionException(string mess) : base(mess)
+        {
+            
+        }
+    }
 }

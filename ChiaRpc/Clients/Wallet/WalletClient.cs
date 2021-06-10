@@ -26,6 +26,15 @@ namespace Chia.NET.Clients
             });
             return result.Wallet;
         }
+        
+        public async Task<Wallet> GetPrivateKey(int walletId)
+        {
+            var result = await PostAsync<GetWalletBalanceResult>(WalletRoutes.GetWalletBalance(ApiUrl), new Dictionary<string, string>()
+            {
+                ["wallet_id"] = $"{walletId}"
+            });
+            return result.Wallet;
+        }
 
         /// <summary>
         /// Retrieves the address of the wallet at the given id for the current key.

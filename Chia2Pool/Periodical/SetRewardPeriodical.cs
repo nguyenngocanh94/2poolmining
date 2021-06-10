@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Timers;
 using Caliburn.Micro;
 using Chia2Pool.Chia;
@@ -8,9 +9,9 @@ using ChiaRpc.Exceptions;
 
 namespace Chia2Pool.Periodical
 {
-    public class SetRewardPeriodical : BaseTimer
+    public class SetRewardPeriodical
     {
-        
+        private System.Timers.Timer timer;
         protected readonly IEventAggregator Events;
         public IEventAggregator EventAggregator => Events;
         
@@ -18,21 +19,22 @@ namespace Chia2Pool.Periodical
         private PoolClient _poolClient;
         private string _poolAddress;
         
-        public SetRewardPeriodical(int time, string initialAddress, IEventAggregator events) : base(time)
+        public SetRewardPeriodical(IEventAggregator events)
         {
             _chiaController = new ChiaController(Settings.GetInstance().SslDirectory);
-            _poolAddress = initialAddress;
             this.Events = events;
             _poolClient = new PoolClient(Settings.GetInstance().PoolUrl, Settings.GetInstance().ApiKey);
         }
 
-        protected override void timer_Elapsed(object sender, ElapsedEventArgs e)
+        public async Task Run()
         {
             try
             {
+                Events.PublishOnUIThreadAsync(Logger.Info("Get Plot Info .. "));
                 var data  = _poolClient.GetPoolInfo();
-                _poolAddress = data.Data.Pa;
-                _chiaController.FarmerClient.SetRewardTargets(_poolAddress);
+                _poolAddress = data.data.pa;
+                await Events.PublishOnUIThreadAsync(Logger.Info("Set Reward target .. "));
+                await _chiaController.FarmerClient.SetRewardTargets(_poolAddress);
             }
             catch (Exception exception)
             {
@@ -46,11 +48,6 @@ namespace Chia2Pool.Periodical
                     Events.PublishOnUIThreadAsync(Logger.Warn(exception.Message));
                 }
             }
-        }
-
-        protected void OnStop(string message)
-        {
-            // show log
         }
     }
 }

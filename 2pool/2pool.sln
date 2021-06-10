@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timer", "..\Timer\Timer.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chia2Pool", "..\Chia2Pool\Chia2Pool.csproj", "{920A0932-9EC1-48A8-BF3C-5E12F294C77F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{44F3E048-29A6-46D3-9C10-01B7CEA6F111}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Launcher", "Launcher\Launcher.csproj", "{7180DB2A-14C3-498B-AAFF-39032471E0E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{920A0932-9EC1-48A8-BF3C-5E12F294C77F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{920A0932-9EC1-48A8-BF3C-5E12F294C77F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{920A0932-9EC1-48A8-BF3C-5E12F294C77F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44F3E048-29A6-46D3-9C10-01B7CEA6F111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44F3E048-29A6-46D3-9C10-01B7CEA6F111}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44F3E048-29A6-46D3-9C10-01B7CEA6F111}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44F3E048-29A6-46D3-9C10-01B7CEA6F111}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7180DB2A-14C3-498B-AAFF-39032471E0E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7180DB2A-14C3-498B-AAFF-39032471E0E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7180DB2A-14C3-498B-AAFF-39032471E0E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7180DB2A-14C3-498B-AAFF-39032471E0E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

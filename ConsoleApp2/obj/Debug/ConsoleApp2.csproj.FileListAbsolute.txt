@@ -5,3 +5,6 @@ C:\Users\Admin\source\repos\ConsoleApp2\obj\Debug\ConsoleApp2.csproj.AssemblyRef
 C:\Users\Admin\source\repos\ConsoleApp2\obj\Debug\ConsoleApp2.csproj.CoreCompileInputs.cache
 C:\Users\Admin\source\repos\ConsoleApp2\obj\Debug\ConsoleApp2.exe
 C:\Users\Admin\source\repos\ConsoleApp2\obj\Debug\ConsoleApp2.pdb
+C:\Users\Admin\source\repos\ConsoleApp2\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Admin\source\repos\ConsoleApp2\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Admin\source\repos\ConsoleApp2\obj\Debug\ConsoleApp2.csproj.CopyComplete

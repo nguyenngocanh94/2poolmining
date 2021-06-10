@@ -1,6 +1,8 @@
 ﻿using Chia.NET.Clients.Farmer;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Chia.NET.Models.Farmer;
+using Chia.NET.Models.Farmer.Result;
 
 namespace Chia.NET.Clients
 {
@@ -12,6 +14,16 @@ namespace Chia.NET.Clients
             : base(ssl,"farmer", ApiUrl)
         {
             InitializeAsync();
+        }
+
+        public async Task<GetRewardTargetResult> GetRewardTarget()
+        {
+            var data =  await PostAsync<GetRewardTargetResult>(FarmerRoutes.GetRewardTarget(ApiUrl),
+                new Dictionary<string, bool>()
+                {
+                    ["search_for_private_key"] = false
+                });
+            return data;
         }
 
         public async Task SetRewardTargets(string targetAddress)

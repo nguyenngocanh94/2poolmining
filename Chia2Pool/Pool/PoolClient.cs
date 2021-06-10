@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Chia2Pool.Common;
 using Chia2Pool.Encrypt;
+using Newtonsoft.Json;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Chia2Pool.Pool
 {
@@ -43,9 +44,8 @@ namespace Chia2Pool.Pool
             var response = _client.SendAsync(request).GetAwaiter().GetResult();
             response.EnsureSuccessStatusCode();
             var resultRes = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            var real = ClsCrypto.DecryptStringAes(resultRes);
-            var result = JsonSerializer.Deserialize<T>(real); 
-            return result.Status != "success"
+            var result = JsonSerializer.Deserialize<T>(resultRes); 
+            return result.status != "success"
                 ? throw new PoolHttpException("pool response with unsuccessful")
                 : result;
         }
@@ -60,9 +60,8 @@ namespace Chia2Pool.Pool
             var response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             var resultStr = await response.Content.ReadAsStringAsync();
-            var real = ClsCrypto.DecryptStringAes(resultStr);
-            var result = JsonSerializer.Deserialize<T>(real); 
-            return result.Status != "success"
+            var result = JsonSerializer.Deserialize<T>(resultStr); 
+            return result.status != "success"
                 ? throw new PoolHttpException("pool response with unsuccessful")
                 : result;
         }
@@ -70,36 +69,36 @@ namespace Chia2Pool.Pool
 
     public class B
     {
-        public string Status { get; set; }
+        public string status { get; set; }
     }
 
     public class P : B
     {
-        public D Data { get; set; }
+        public D data { get; set; }
     }
 
     public class D
     {
-        public string Pa { get; set; }
+        public string pa { get; set; }
     }
 
     public class SendInfo
     {
-        public string T { get; set; }
-        public Data D { get; set; }
-        public string N { get; set; }
+        public string t { get; set; }
+        public Data d { get; set; }
+        public string n { get; set; }
     }
 
     public class Data
     {
-        public PlotDetail[] P { get; set; }
+        public PlotDetail[] p { get; set; }
     }
 
     public class PlotDetail
     {
-        public int K { get; set; }
-        public int N { get; set; }
-        public ulong S { get; set; }
+        public int k { get; set; }
+        public int n { get; set; }
+        public ulong s { get; set; }
     }
 
     public class MessageFactory
@@ -108,15 +107,15 @@ namespace Chia2Pool.Pool
         {
             return new()
             {
-                T = "PI",
-                N = RandomUtil.GetSixRandom()
+                t = "PI",
+                n = RandomUtil.GetSixRandom()
             };
         }
     }
 
     public class PoolInfoRequest
     {
-        public string T { get; set; }
-        public string N { get; set; }
+        public string t { get; set; }
+        public string n { get; set; }
     }
 }

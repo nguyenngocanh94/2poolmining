@@ -13,6 +13,7 @@ namespace Chia2Pool.Models
         public string Message { get; set; }
         
         public string Level { get; set; }
+        
     }
 
     public class PropertyChangeBaseX : INotifyPropertyChanged

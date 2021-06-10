@@ -10,7 +10,7 @@ using ChiaRpc.Exceptions;
 
 namespace Chia2Pool.Periodical
 {
-    public class SendInfoPeriodical : BaseTimer
+    public class SendInfoPeriodical
     {
         private ChiaController _chiaController;
         private PoolClient _poolClient;
@@ -19,35 +19,34 @@ namespace Chia2Pool.Periodical
         public IEventAggregator EventAggregator => events;
         
         
-        public SendInfoPeriodical(int time, IEventAggregator events) : base(time)
+        public SendInfoPeriodical(IEventAggregator events)
         {
             this.events = events;
             _chiaController = new ChiaController(Settings.GetInstance().SslDirectory);
             _poolClient = new PoolClient(Settings.GetInstance().PoolUrl, Settings.GetInstance().ApiKey);
         }
         
-        protected void timer_Elapsed(object sender, ElapsedEventArgs e)
+        public async Task Run()
         {
-            Task.Run(async () =>
+            try
             {
-                try
+                events.PublishOnUIThreadAsync(Logger.Info("Send plots to server .. "));
+                var plots = await _chiaController.HarvesterClient.GetPlotsAsync();
+                _poolClient.SendData(HandlePlots.HandlePlot(plots));
+            }
+            catch (Exception exception)
+            {
+                if (exception is ChiaHttpException)
                 {
-                    var plots = await _chiaController.HarvesterClient.GetPlotsAsync();
-                    _poolClient.SendData(HandlePlots.HandlePlot(plots));
+                    events.PublishOnUIThreadAsync(Logger.Warn(exception.Message));
                 }
-                catch (Exception exception)
-                {
-                    if (exception is ChiaHttpException)
-                    {
-                        events.PublishOnUIThreadAsync(Logger.Warn(exception.Message));
-                    }
 
-                    if (exception is PoolHttpException)
-                    {
-                        events.PublishOnUIThreadAsync(Logger.Warn(exception.Message));
-                    }
+                if (exception is PoolHttpException)
+                {
+                    events.PublishOnUIThreadAsync(Logger.Warn(exception.Message));
                 }
-            });
+            }
         }
+        
     }
 }

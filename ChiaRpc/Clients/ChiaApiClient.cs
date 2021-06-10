@@ -85,17 +85,55 @@ namespace Chia.NET.Clients
                 Content = new StringContent(JsonSerializer.Serialize(parameters), Encoding.UTF8, 
                     "application/json")
             };
-            
 
-            var response = await Client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-            var stringRes = await response.Content.ReadAsStringAsync();
-            var result = JsonSerializer.Deserialize<T>(stringRes);
-            return !result.Success
-                ? throw new ChiaHttpException("Chia responded with unsuccessful")
-                : result;
+            try
+            {
+                var response = await Client.SendAsync(request);
+                response.EnsureSuccessStatusCode();
+                var stringRes = await response.Content.ReadAsStringAsync();
+                var result = JsonSerializer.Deserialize<T>(stringRes);
+                return !result.Success
+                    ? throw new ChiaHttpException("Chia responded with unsuccessful")
+                    : result;
+            }
+            catch (Exception e)
+            {
+                if (e is ChiaHttpException)
+                {
+                    throw e;
+                }
+                throw new ChiaConnectionException("Can not connect to chia blockchain: "+e.Message);
+            }
         }
 
+        protected async Task<T> PostAsync<T>(Uri requestUri, IDictionary<string, bool> parameters) where T : ChiaResult
+        {
+            using var request = new HttpRequestMessage(HttpMethod.Post, requestUri)
+            {
+                Content = new StringContent(JsonSerializer.Serialize(parameters), Encoding.UTF8, 
+                    "application/json")
+            };
+
+            try
+            {
+                var response = await Client.SendAsync(request);
+                response.EnsureSuccessStatusCode();
+                var stringRes = await response.Content.ReadAsStringAsync();
+                var result = JsonSerializer.Deserialize<T>(stringRes);
+                return !result.Success
+                    ? throw new ChiaHttpException("Chia responded with unsuccessful")
+                    : result;
+            }
+            catch (Exception e)
+            {
+                if (e is ChiaHttpException)
+                {
+                    throw e;
+                }
+                throw new ChiaConnectionException("Can not connect to chia blockchain: "+e.Message);
+            }
+        }
+        
         protected Task PostAsync(Uri requestUri, IDictionary<string, string> parameters = null)
             => PostAsync<ChiaResult>(requestUri, parameters);
         
@@ -116,14 +154,25 @@ namespace Chia.NET.Clients
                     "application/json")
             };
             
-            var response = Client.SendAsync(request).GetAwaiter().GetResult();
-            response.EnsureSuccessStatusCode();
-            var stringRes =  response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            var result = JsonSerializer.Deserialize<T>(stringRes);
+            try
+            {
+                var response = Client.SendAsync(request).GetAwaiter().GetResult();
+                response.EnsureSuccessStatusCode();
+                var stringRes =  response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                var result = JsonSerializer.Deserialize<T>(stringRes);
 
-            return !result.Success
-                ? throw new ChiaHttpException("Chia responded with unsuccessful")
-                : result;
+                return !result.Success
+                    ? throw new ChiaHttpException("Chia responded with unsuccessful")
+                    : result;
+            }
+            catch (Exception e)
+            {
+                if (e is ChiaHttpException)
+                {
+                    throw e;
+                }
+                throw new ChiaConnectionException("Can not connect to chia blockchain: "+e.Message);
+            }
         }
     }
 }
